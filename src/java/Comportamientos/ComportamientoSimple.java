@@ -15,8 +15,8 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Ing. Henry P. Paz Arias Mgs. Especialista en Inteligencia Artificial
- * Skype: henry-patricio Correo: hpaz@unl.edu.ec
+ * @robert
+ * 
  */
 public class ComportamientoSimple extends Behaviour {
 

@@ -13,8 +13,8 @@ import jade.lang.acl.ACLMessage;
 
 /**
  *
- * @author Ing. Henry P. Paz Arias Mgs. Especialista en Inteligencia Artificial
- * Skype: henry-patricio Correo: hpaz@unl.edu.ec
+ * autores: @robert
+ * 
  */
 public class ComportamientoEmisor extends Behaviour {
 
