@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+      <ui:composition template="./../template.xhtml"> 
+            
+            <ui:define name="content">
+                <p:growl id="msgs" showDetail="true" />
+                <h:form>
+                    <p:commandButton id ="btnUsuarioCreate" update=":formCreate" action="#{agenteBeen.setAbrirCreate(true)}" 
+                                     icon="icon-new" title="Crear" value="Crear"/>                                   
+                </h:form>
+                <h:form id="formDataTable">
+                    <p:dataTable id="agentes" var="agentes" value="#{agenteBeen.agentes}">
+
+                        <p:column headerText="Código">
+                            <h:outputText value="#{agentes.ageCodigo}" />
+                        </p:column>
+
+                        <p:column headerText="Dirección">
+                            <h:outputText value="#{agentes.ageDireccion}" />
+                        </p:column>
+
+                        <p:column headerText="Estado">
+                            <h:outputText value="#{agentes.ageEstado}" />
+                        </p:column>
+                        
+                        <p:column headerText="Sentido">
+                            <h:outputText value="#{agentes.ageSentido}" />
+                        </p:column>
+                        
+                        <p:column headerText="Latitud">
+                            <h:outputText value="#{agentes.ageLatitud}" />
+                        </p:column>
+                        
+                        <p:column headerText="Longitud">
+                            <h:outputText value="#{agentes.ageLongitud}" />
+                        </p:column>
+                        
+                        <p:column headerText="Fase">
+                            <h:outputText value="#{agentes.ageFase}" />
+                        </p:column>
+                        
+                        <p:column headerText="Semáforo Norte">
+                            <h:outputText value="#{agentes.ageNorte}" />
+                        </p:column>
+                        <p:column headerText="Semáforo Sur">
+                            <h:outputText value="#{agentes.ageSur}" />
+                        </p:column>
+                        <p:column headerText="Semáforo Este">
+                            <h:outputText value="#{agentes.ageEste}" />
+                        </p:column>
+                        <p:column headerText="Semáforo Oeste">
+                            <h:outputText value="#{agentes.ageOeste}" />
+                        </p:column>
+                        <p:column headerText="Tipo de Luz">
+                            <h:outputText value="#{agentes.ageTipoluz}" />
+                        </p:column>
+                        
+                        <p:column headerText="Observaciones">
+                            <h:outputText value="#{agentes.ageObservacion}" />
+                        </p:column>
+
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton id ="btnUpdate" update=":formUpdate" process="@this"
+                                             icon="icon-edit" title="View" actionListener="#{agenteBeen.setSelectedAgentes(agentes)}"
+                                             action="#{agenteBeen.setAbrirUpdate(true)}">
+                            </p:commandButton>
+
+                            <p:commandButton id ="btnDelete" update=":formDelete" process="@this"
+                                             icon="icon-delete" title="View" actionListener="#{agenteBeen.setSelectedAgentes(agentes)}"
+                                             action="#{agenteBeen.setAbrirDelete(true)}">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form> 
+                <h:form id="formCreate">
+                    <p:dialog header="Crear agente" widgetVar="dialogUsuarioCreate" modal="true" 
+                              showEffect="fade" hideEffect="fade" resizable="false" id="dlgUsuarioCreate"
+                              visible="#{agenteBeen.abrirCreate}" closable="false">
+
+                        <p:panelGrid  id ="display" columns="2"  style=" margin:0 auto;">
+
+                            <p:outputLabel value="Código:" />
+                            <p:inputText value="#{agenteBeen.selectedAgentes.ageCodigo}" size="30" required="true" requiredMessage="Ingrese el código"/>
+
+                            <p:outputLabel value="Dirección:" />
+                            <p:inputText value="#{agenteBeen.selectedAgentes.ageDireccion}" size="30" required="true" requiredMessage="Ingrese la dirección"/>
+
+                            <p:outputLabel value="Latitud:" />
+                            <p:inputText value="#{agenteBeen.selectedAgentes.ageLatitud}" size="30" required="true" requiredMessage="Ingrese la latitud"/>
+
+                            <p:outputLabel value="Longitud:" />
+                            <p:inputText value="#{agenteBeen.selectedAgentes.ageLongitud}" size="30" required="true" requiredMessage="Ingrese la longitud"/>
+                            
+                            <p:outputLabel value="Tipo de luz:" />
+                            <p:selectOneMenu value="#{agenteBeen.selectedAgentes.ageTipoluz}">
+                                <f:selectItems value="#{agenteBeen.tipoLuz}"></f:selectItems>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Sentido:" />
+                            <p:selectOneMenu value="#{agenteBeen.selectedAgentes.ageSentido}">
+                                <f:selectItems value="#{agenteBeen.tipoSentido}"></f:selectItems>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Observación:" />
+                            <p:inputTextarea value="#{agenteBeen.selectedAgentes.ageObservacion}" style="width: 97%"/>
+                        
+                        </p:panelGrid>
+                        <p:panelGrid  id ="displayCreate2" columns="2"  style=" margin:0 auto;">
+                            <p:commandButton id ="btnGuardar" update=":formDataTable, :formCreate, :msgs" process=":formCreate"
+                                             value="Guardar" action="#{agenteBeen.guardarAgente()}">
+                            </p:commandButton>
+
+                            <p:commandButton id ="btnCancelar2" update=":formCreate" process="@this"
+                                             value="Cancelar" action="#{agenteBeen.setAbrirCreate(false)}">
+                                
+                            </p:commandButton>
+                        </p:panelGrid>
+
+                    </p:dialog>
+                </h:form>
+
+                <h:form id="formUpdate">
+                    <p:dialog header="Modificar agente" widgetVar="dialogoUsuarioUpdate" modal="true"
+                              showEffect="fade" hideEffect="fade" resizable="false" id="dlgUsuarioUpdate" visible="#{agenteBeen.abrirUpdate}">
+                        <p:panelGrid  id ="display" columns="2"  style=" margin:0 auto;">      
+
+                            <p:outputLabel value="Código:" />
+                            <p:inputText value="#{agenteBeen.selectedAgentes.ageCodigo}" size="30" required="true" requiredMessage="Ingrese el código"/>
+
+                            <p:outputLabel value="Dirección:" />
+                            <p:inputText value="#{agenteBeen.selectedAgentes.ageDireccion}" size="30" required="true" requiredMessage="Ingrese el nombre"/>
+
+                            <p:outputLabel value="Latitud:" />
+                            <p:inputText value="#{agenteBeen.selectedAgentes.ageLatitud}" size="30" required="true" requiredMessage="Ingrese el nombre del usuario"/>
+                            
+                            <p:outputLabel value="Longitud:" />
+                            <p:inputText value="#{agenteBeen.selectedAgentes.ageLongitud}" size="30" required="true" requiredMessage="Ingrese la longitud"/>
+                            
+                            <p:outputLabel value="Tipo de luz:" />
+                            <p:selectOneMenu value="#{agenteBeen.selectedAgentes.ageTipoluz}">
+                                <f:selectItems value="#{agenteBeen.tipoLuz}"></f:selectItems>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Observación:" />
+                            <p:inputTextarea value="#{agenteBeen.selectedAgentes.ageObservacion}" style="width: 97%"/>
+                            
+                        </p:panelGrid>
+                        <p:panelGrid  id ="display2" columns="2"  style=" margin:0 auto;">
+                            <p:commandButton id ="btnGuardar" update=":formDataTable, :formUpdate, :msgs" process=":formUpdate"
+                                             value="Actualizar" actionListener="#{agenteBeen.actualizarAgente()}">
+                            </p:commandButton>
+
+                            <p:commandButton id ="btnCancelar" update=":formDataTable, :formUpdate" process=":formUpdate"
+                                             value="Cancelar" actionListener="#{agenteBeen.setAbrirUpdate(false)}">
+                            </p:commandButton>
+                        </p:panelGrid>
+
+                    </p:dialog>
+
+                </h:form>
+
+                <h:form id="formDelete">                 
+                    <p:confirmDialog id="confirmDialog" message="¿Está seguro de eliminar el registro?" closable="false"
+                                     header="Eliminar agente" severity="alert" visible="#{agenteBeen.abrirDelete}">
+                        <p:commandButton  id ="confirm" value="Aceptar" update=":formDataTable, :formDelete, :msgs"
+                                          actionListener="#{agenteBeen.eliminarAgente()}" process="@this"/>
+                        <p:commandButton id ="decline" value="Cancelar" actionListener="#{agenteBeen.setAbrirDelete(false)}"
+                                         update=":formDelete" process="@this"/>
+                    </p:confirmDialog>
+                </h:form>
+            </ui:define>            
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/09/2014 04:18:52 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="model.Usuario" table="usuario" catalog="bddsemaforo">
+        <id name="usuId" type="java.lang.Integer">
+            <column name="usu_id" />
+            <generator class="identity" />
+        </id>
+        <property name="usuNombre" type="string">
+            <column name="usu_nombre" length="45" not-null="true" unique="true">
+                <comment>Indica el nombre del usuario</comment>
+            </column>
+        </property>
+        <property name="usuClave" type="string">
+            <column name="usu_clave" length="45" not-null="true" unique="true">
+                <comment>Indica la clave del usuario</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

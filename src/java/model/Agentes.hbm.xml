@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/09/2014 04:18:52 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="model.Agentes" table="agentes" catalog="bddsemaforo">
+        <id name="ageId" type="int">
+            <column name="age_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="ageCodigo" type="string">
+            <column name="age_codigo" length="100" not-null="true" unique="true" />
+        </property>
+        <property name="ageDireccion" type="string">
+            <column name="age_direccion" length="200" not-null="true">
+                <comment>Indica la direcci&#243;n del Agente</comment>
+            </column>
+        </property>
+        <property name="ageLatitud" type="java.lang.Double">
+            <column name="age_latitud" precision="22" scale="0">
+                <comment>Indica la latitud del agente</comment>
+            </column>
+        </property>
+        <property name="ageLongitud" type="java.lang.Double">
+            <column name="age_longitud" precision="22" scale="0">
+                <comment>Indica la longitud del agente</comment>
+            </column>
+        </property>
+        <property name="ageFase" type="string">
+            <column name="age_fase" length="3">
+                <comment>rojo, amarillo, verde</comment>
+            </column>
+        </property>
+        <property name="ageEstado" type="string">
+            <column name="age_estado" length="100">
+                <comment>Indica el estado del agente, A (amarillo), R (rojo), V (verde).</comment>
+            </column>
+        </property>
+        <property name="ageSentido" type="string">
+            <column name="age_sentido" length="40">
+                <comment>Indica el sentido del semaforo</comment>
+            </column>
+        </property>
+        <property name="ageTipoluz" type="string">
+            <column name="age_tipoluz" length="20" />
+        </property>
+        <property name="ageNorte" type="java.lang.Integer">
+            <column name="age_norte">
+                <comment>Indica el identificador del agente que se aproxima por el norte.</comment>
+            </column>
+        </property>
+        <property name="ageSur" type="java.lang.Integer">
+            <column name="age_sur">
+                <comment>Indica el identificador del agente que se aproxima por el sur.</comment>
+            </column>
+        </property>
+        <property name="ageEste" type="java.lang.Integer">
+            <column name="age_este">
+                <comment>Indica el identificador del agente que se aproxima por el este.</comment>
+            </column>
+        </property>
+        <property name="ageOeste" type="java.lang.Integer">
+            <column name="age_oeste">
+                <comment>Indica el identificador del agente que se aproxime por el oeste.</comment>
+            </column>
+        </property>
+        <property name="ageObservacion" type="string">
+            <column name="age_observacion" length="100">
+                <comment>Indica observaciones del semaforo</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

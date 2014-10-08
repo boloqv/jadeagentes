@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17/09/2014 04:18:52 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="model.Creencias" table="creencias" catalog="bddsemaforo">
+        <id name="creId" type="int">
+            <column name="cre_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="creDescripcion" type="string">
+            <column name="cre_descripcion" length="100" not-null="true">
+                <comment>Indica la descripci&#243;n de la creencia</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

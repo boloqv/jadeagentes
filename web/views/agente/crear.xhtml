@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Crear Usuario" widgetVar="dialogUsuarioCreate" modal="true" 
+              showEffect="fade" hideEffect="fade" resizable="false" id="formCreate">
+
+        <p:panelGrid  id ="display" columns="1"  style=" margin:0 auto;">
+
+            <h:outputText value="Código:" />
+            <h:inputText value="#{agenteBeen.selectedAgentes.ageCodigo}" />
+
+            <h:outputText value="Dirección:" />
+            <h:inputText value="#{agenteBeen.selectedAgentes.ageDireccion}" />
+
+            <h:outputText value="Estado:" />
+            <h:inputText value="#{agenteBeen.selectedAgentes.ageEstado}" size="60" />
+
+            <h:outputText value="Latitud:" />
+            <h:outputText value="#{agentes.ageLatitud}" />
+
+            <h:outputText value="Longitud:" />
+            <h:outputText value="#{agentes.ageLongitud}" />
+
+            <h:outputText value="Tipo de luz:" />
+            <h:outputText value="#{agentes.ageTipoluz}" />
+
+            <h:outputText value="Observación:" />
+            <h:outputText value="#{agentes.ageObservacion}" />
+        </p:panelGrid>
+        <p:panelGrid  id ="displayCreate" columns="2"  style=" margin:0 auto;">
+            <p:commandButton id ="btnGuardar" update=":formCreate, :msgs" process=":formCreate"
+                             value="Guardar" action="#{agenteBeen.guardarAgente()}">
+            </p:commandButton>
+
+            <p:commandButton id ="btnCancelar2" update=":formCreate" process=":formCreate"
+                             value="Cancelar" actionListener="#{agenteBeen.setAbrirCreate(false)}">
+            </p:commandButton>
+        </p:panelGrid>
+    </p:dialog>
+</html>

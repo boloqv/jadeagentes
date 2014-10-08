@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+    <ui:composition template="./../template.xhtml">
+            
+            <ui:define name="content">
+                <p:growl id="msgs" showDetail="true" />
+                <h:form>
+                    <p:commandButton id ="btnUsuarioCreate" update=":formCreate"
+                                     icon="icon-search" title="Crear" value="Crear"
+                                     action="#{usuarioBeen.setAbrirCreate(true)}"/>                                   
+                </h:form>
+                <h:form id="formDataTable">
+                    <p:dataTable id="usuario" var="usuario" value="#{usuarioBeen.usuarios}">
+
+                        <p:column headerText="Id">
+                            <h:outputText value="#{usuario.usuId}" />
+                        </p:column>
+
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{usuario.usuNombre}" />
+                        </p:column>
+
+                        <p:column headerText="Clave">
+                            <h:outputText value="#{usuario.usuClave}" />
+                        </p:column>
+
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton id ="btnUpdate" update=":formUpdate" process="@this"
+                                             icon="icon-edit" title="View" actionListener="#{usuarioBeen.setSelectedUsuario(usuario)}"
+                                             action="#{usuarioBeen.setAbrirUpdate(true)}">
+                                
+                            </p:commandButton>
+
+                            <p:commandButton id ="btnDelete" update=":formDelete" process="@this"
+                                             icon="icon-delete" title="View" actionListener="#{usuarioBeen.setSelectedUsuario(usuario)}"
+                                             action="#{usuarioBeen.setAbrirDelete(true)}">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form> 
+                <h:form id="formCreate">
+                    <p:dialog header="Crear Usuario" widgetVar="dialogUsuarioCreate" modal="true" 
+                              showEffect="fade" hideEffect="fade" resizable="false" id="dlgUsuarioCreate" 
+                              visible="#{usuarioBeen.abrirCreate}" closable="false">
+
+                        <p:panelGrid  id ="displayCreate" columns="2"  style=" margin:0 auto;">
+
+                            <h:outputText value="Usuario" />
+                            <p:inputText value="#{usuarioBeen.selectedUsuario.usuNombre}" size="30" required="true" requiredMessage="Ingrese el nombre del usuario"/>
+
+                            <h:outputText value="Clave:" />
+                            <p:inputText value="#{usuarioBeen.selectedUsuario.usuClave}" size="30" required="true" requiredMessage="Ingrese la clave del usuario"/>
+
+                        </p:panelGrid>
+                        
+                        <p:panelGrid  id ="displayCreate2" columns="2"  style=" margin:0 auto;">
+                            <p:commandButton id ="btnGuardar" update=":formDataTable, :formCreate, :msgs" process=":formCreate"
+                                             value="Guardar" action="#{usuarioBeen.guardarUsuario()}">
+                            </p:commandButton>
+
+                            <p:commandButton id ="btnCancelar2" update=":formCreate" process="@this"
+                                             value="Cancelar" action="#{usuarioBeen.setAbrirCreate(false)}">
+                                
+                            </p:commandButton>
+                        </p:panelGrid>
+                    </p:dialog>
+                </h:form>
+
+                <h:form id="formUpdate">
+                    <p:dialog header="Modificar Usuario" widgetVar="dialogoUsuarioUpdate" modal="true"
+                              showEffect="fade" hideEffect="fade" resizable="false" id="dlgUsuarioUpdate" visible="#{usuarioBeen.abrirUpdate}">
+                        <p:panelGrid  id ="display" columns="2"  style=" margin:0 auto;">      
+
+                            <h:outputText value="Usuario" />
+                            <p:inputText value="#{usuarioBeen.selectedUsuario.usuNombre}" size="30" required="true" requiredMessage="Ingrese el nombre del usuario"/>
+
+                            <h:outputText value="Clave:" />
+                            <p:inputText value="#{usuarioBeen.selectedUsuario.usuClave}" size="30" required="true" requiredMessage="Ingrese la clave del usuario"/>
+
+
+                        </p:panelGrid>
+                        <p:panelGrid  id ="display2" columns="2"  style=" margin:0 auto;">
+                            <p:commandButton id ="btnGuardar" update=":formDataTable, :formUpdate, :msgs" process=":formUpdate"
+                                             value="Actualizar" actionListener="#{usuarioBeen.actualizarUsuario()}">
+                            </p:commandButton>
+
+                            <p:commandButton id ="btnCancelar" update=":formDataTable, :formUpdate" process=":formUpdate"
+                                              value="Cancelar" actionListener="#{usuarioBeen.cancelar()}">
+                                
+                            </p:commandButton>
+                        </p:panelGrid>
+                    </p:dialog>
+
+                </h:form>
+
+                <h:form id="formDelete">                 
+                    <p:confirmDialog id="confirmDialog" message="¿Está seguro de eliminar el registro?" closable="false"
+                                     header="Eliminar Usuario" severity="alert" visible="#{usuarioBeen.abrirDelete}">
+                        <p:commandButton  id ="confirm" value="Aceptar" update=":formDataTable, :formDelete, :msgs"
+                                          actionListener="#{usuarioBeen.eliminarUsuario()}" process="@this"/>
+                        <p:commandButton id ="decline" value="Cancelar" actionListener="#{usuarioBeen.setAbrirDelete(false)}"
+                                         update=":formDelete" process="@this"/>
+                    </p:confirmDialog>
+                </h:form>
+            </ui:define>            
+
+        </ui:composition>
+
+    </body>
+</html>
