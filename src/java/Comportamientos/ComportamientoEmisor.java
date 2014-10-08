@@ -14,6 +14,8 @@ import jade.lang.acl.ACLMessage;
 /**
  *
  * autores: @robert
+ * jhvjvjvjbkgv
+ * kbjvghcc
  * 
  */
 public class ComportamientoEmisor extends Behaviour {
